@@ -1,0 +1,88 @@
+
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand" style="padding:0;">
+                <img src="./assets/imgs/logo.png" alt="Ming logo">
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">&nbsp;Students</a>
+        </div>
+
+    </div>
+</nav>
+
+
+<div class="container">
+  <div class="row" id="list1">
+    <div class="thumbnail col-md-8 " style="box-shadow:2px 2px 3px #ccc;">
+      <div class="caption">
+        <h3 class="tab-h2">Student Information Administration</h3>
+      </div>
+      <br />
+      <table class="table table-striped" style="box-shadow:2px 2px 3px #ccc;">
+        <tr>
+          <th></th>
+          <!-- <th>Category ID</th> -->
+          <th>
+              <button class="btn btn-default" (click)="sortBy('first_name')">First Name</button>
+          </th>
+          
+          <th>
+              <button class="btn btn-default" (click)="sortBy('last_name')">Last Name</button>
+          </th>
+          <th>
+              <button class="btn btn-default" (click)="sortBy('dateOfCreated')">Date Of Created</button>
+           </th>
+        </tr>
+        <tr *ngFor="let item of students">
+          <td>
+            <button class="delete" (click)="addOne(); $event.stopPropagation()">Add</button>
+            <button class="delete" (click)="deleteOne(item); $event.stopPropagation()">Delete</button>
+            <button class="delete" (click)="editOne(item); $event.stopPropagation()">Update</button>
+          </td>
+          <!-- <td align="center">{{item.id}}</td> -->
+          <td>{{item.first_name}}</td>
+          <td>{{item.last_name}}</td>
+          <td>{{item.dateOfCreated | date:'short'}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail" *ngIf="editItem">
+          <div class="caption">
+            <h3>{{subTitle}}</h3>
+            <hr>
+            <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+              {{diagnostic}}
+              <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" id="first_name" required [(ngModel)]="editItem.first_name" name="first_name">
+              </div>
+              <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" class="form-control" id="last_name" required [(ngModel)]="editItem.last_name" name="last_name">
+              </div>
+              <button type="submit" class="btn btn-info" [disabled]="!heroForm.form.valid">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+
